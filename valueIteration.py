@@ -40,11 +40,24 @@ def policy(V, state, actions, transitions, rewards, gamma):
             best_action = a
 
     return best_action
-    
 
-# Run an episode of game from a given initial state to end state following the optimal policy pi
-def playEpisode(s0, isTerminal, V, actions, transitions, rewards, gamma) :
-    state= s0 #set cursor to initial state
-    # à compléter
+
+def playEpisode(s0, isTerminal, V, actions, transitions, rewards, gamma):
+    state = s0
+
+    while not isTerminal(state):
+        a = policy(V, state, actions, transitions, rewards, gamma)
+
+        next_states = transitions(state, a)
+        next_state = random.choices(
+            list(next_states.keys()),
+            weights=list(next_states.values())
+        )[0]
+
+        r = rewards(state, a)
+
+        print(f"s={state}, a={a}, s'={next_state}, r={r}")
+
+        state = next_state
 
     
