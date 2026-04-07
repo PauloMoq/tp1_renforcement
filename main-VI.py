@@ -39,6 +39,11 @@ print("ITERATIONS OF MDP VALUE ITERATION")
 print("----------------------------\n")
 VI = valueIteration.VI(game.states, game.actions, game.transitions, game.rewards, epsilon, gamma)
 
+print("\nPolitique optimale :")
+for s in game.states:
+    a = valueIteration.policy(VI, s, game.actions, game.transitions, game.rewards, gamma)
+    print(f"  pi({s}) = {a}")
+
 # Run a complete episode from initial state to end state following the optimal policy
 print("\n----------------------------")
 print("OPTIMAL POLICY À PARTIR DE S0")

@@ -26,13 +26,19 @@ def VI(states, actions, transitions, rewards, epsilon, gamma):
         iteration += 1
     return V
 
-
-
-# pi(s) = argmax V(s) for all a in A
-# the policy for a given state returns the best action to perform in this state knowing V
 def policy(V, state, actions, transitions, rewards, gamma):
     best_action = actions[0]
-    # à compléter
+    best_value = float('-inf')
+
+    for a in actions:
+        q_value = rewards(state, a) + gamma * sum(
+            prob * V[s_next]
+            for s_next, prob in transitions(state, a).items()
+        )
+        if q_value > best_value:
+            best_value = q_value
+            best_action = a
+
     return best_action
     
 
